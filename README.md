@@ -71,6 +71,30 @@ $ docker exec -it <container_name> install-sampledata
 
 The default `docker-compose.yml` uses MySQL as the database and starts [phpMyAdmin](https://www.phpmyadmin.net/). The default URL for phpMyAdmin is `http://localhost:8580`. Use MySQL username and password to log in.
 
+## Configure the Becopay plugin 
+
+You must have a Becopay merchant account to use this plugin.  It's free and easy to [sign-up for a becopay merchant account](https://becopay.com/en/merchant-register/).
+
+Configure the Becopay plugin in your Magento admin panel: 
+
+1. Log in to your Magento admin panel. 
+2. In the left navigation bar, go to ``Stores > Configuration.``
+3. In the menu, go to ``Sales > Payment Methods.``
+4. Click Required Settings and fill out the following fields: 
+
+* __Enable/Disable__ - Select ``Enable`` to enable Becopay Payment Gateway.
+* __Title__ - Allows you to determine what your customers will see this payment option as on the checkout page.
+* __Mobile__  - Enter the phone number you registered in the Becopay here.If you don't have Becopay merchat account register [here](https://becopay.com/en/merchant-register/).
+* __Api Base Url__  - Enter Becopay api base url here. If you don't have Becopay merchat account register [here](https://becopay.com/en/merchant-register/).
+* __Merchant Api Key__  - Enter your Becopay Api Key here. If you don't have Becopay merchat account register [here](https://becopay.com/en/merchant-register/).
+* __Order Status after payment__ - Status given to orders after the payment has been completed
+* __Payment From Applicable Countries__ - Payment options limited to specific countries
+* __Sort Order__ - Add Gateway list sort number
+* Click on __Save Config__ For the changes you made to be effected.
+
+### Plugin Callback URL
+```https://your-site/becopay/payment/callback/?orderId=```
+
 ## FAQ
 
 ### Where is the database?
