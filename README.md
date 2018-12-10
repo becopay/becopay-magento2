@@ -13,6 +13,20 @@ __Note__ This docker image uses the *Contributing developer* profile to install 
 Magento 2 has three different ways to [install](http://devdocs.magento.com/guides/v2.0/install-gde/bk-install-guide.html), for users, integrators and developers. This Docker image uses **integrator** as the default installation type, so the **Web Setup Wizard** can be used.
 
 
+## Change default port
+
+Magneto default port is 80. if this port is reserved on your server or wants to use other port, before start the docker you must change the `web service` port on `docker-composer.yml`. e.g. default port `80:80` change to `8080:80`  
+```
+[...]
+services:
+  web:
+    image: becopay/magento2
+    ports:
+      - "8080:80"
+	[...]
+[...]
+```
+
 ## Quick start
 
 The easiest way to start Magento 2 with MySQL is using [Docker Compose](https://docs.docker.com/compose/). Just clone this repo and run following command in the root directory. The default `docker-compose.yml` uses MySQL and phpMyAdmin.
@@ -56,13 +70,18 @@ You can find all available options in the official [setup guide](http://devdocs.
 After starting the container, you'll see the setup page of Magento 2. You can use the script `install-magento` to quickly install Magento 2. The installation script uses the variables in the `env` file.
 
 ### Magento 2
-
+For install Magento you are need to know the mangento container_name. first run this command to get list of your containers
+```
+$ docker ps -a
+```
+find your container name and run replace it on this command then run them for install the mangeto
 ```
 $ docker exec -it <container_name> install-magento
 ```
 
 ### Sample data
 
+Magento sample data provides a storefront based on the Luma theme outfitted with products, categories, customer registration, and so on. It functions just like a Magento storefront and you can manipulate prices, inventory, and promotional pricing rules using the Magento Admin.
 ```
 $ docker exec -it <container_name> install-sampledata
 ```
