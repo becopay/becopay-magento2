@@ -2,17 +2,22 @@
 
 su www-data <<EOSU
 
-if [ -f /var/www/html/var/composer_home/auth.json ]; then
-   rm /var/www/html/var/composer_home/auth.json
+INSTALL_DIR = /var/www/html;
+
+if [ -f $INSTALL_DIR/var/composer_home/auth.json ]; then
+   rm $INSTALL_DIR/var/composer_home/auth.json
 fi
 
-ln -s /var/www/.composer/auth.json /var/www/html/var/composer_home/
+ln -s /var/www/.composer/auth.json INSTALL_DIR/var/composer_home/
 
+$INSTALL_DIR/bin/magento maintenance:enable
 
-/var/www/html/bin/magento sampledata:deploy
+$INSTALL_DIR/bin/magento sampledata:deploy
 
-/var/www/html/bin/magento setup:upgrade
+$INSTALL_DIR/bin/magento setup:upgrade
 
-/var/www/html/bin/magento setup:di:compile
+$INSTALL_DIR/bin/magento setup:di:compile
+
+$INSTALL_DIR/bin/magento maintenance:disable
 
 EOSU
